@@ -2,12 +2,18 @@ package com.rental.carflow.car;
 
 import com.rental.carflow.location.Location;
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.util.UUID;
 
 @Table(name = "cars")
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
