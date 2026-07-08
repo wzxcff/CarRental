@@ -1,12 +1,12 @@
 
 CREATE TABLE locations (
-    id BIGSERIAL PRIMARY KEY,
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     name VARCHAR(100) NOT NULL UNIQUE,
     address VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE users (
-    id BIGSERIAL PRIMARY KEY,
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     email VARCHAR(150) NOT NULL UNIQUE,
     name VARCHAR(100) NOT NULL,
     password VARCHAR(255) NOT NULL,
@@ -15,8 +15,8 @@ CREATE TABLE users (
 );
 
 CREATE TABLE cars (
-    id BIGSERIAL PRIMARY KEY,
-    location_id BIGINT NOT NULL REFERENCES locations(id),
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    location_id UUID NOT NULL REFERENCES locations(id),
     brand VARCHAR(50) NOT NULL,
     model VARCHAR(50) NOT NULL,
     license_plate VARCHAR(50) NOT NULL UNIQUE,
@@ -26,11 +26,11 @@ CREATE TABLE cars (
 );
 
 CREATE TABLE bookings (
-    id BIGSERIAL PRIMARY KEY,
-    user_id BIGINT NOT NULL REFERENCES users(id),
-    car_id BIGINT NOT NULL REFERENCES cars(id),
-    pickup_location_id BIGINT NOT NULL REFERENCES locations(id),
-    return_location_id BIGINT NOT NULL REFERENCES locations(id),
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID NOT NULL REFERENCES users(id),
+    car_id UUID NOT NULL REFERENCES cars(id),
+    pickup_location_id UUID NOT NULL REFERENCES locations(id),
+    return_location_id UUID NOT NULL REFERENCES locations(id),
     start_date DATE NOT NULL,
     end_date DATE NOT NULL,
     total_price NUMERIC(10,2) NOT NULL,
@@ -38,9 +38,9 @@ CREATE TABLE bookings (
 );
 
 CREATE TABLE maintenance_records (
-    id BIGSERIAL PRIMARY KEY,
-    car_id BIGINT NOT NULL REFERENCES cars(id) ON DELETE CASCADE,
-    mechanic_id BIGINT NOT NULL REFERENCES users(id),
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    car_id UUID NOT NULL REFERENCES cars(id) ON DELETE CASCADE,
+    mechanic_id UUID NOT NULL REFERENCES users(id),
     description TEXT NOT NULL,
     cost NUMERIC(10,2) NOT NULL DEFAULT 0.00,
     start_date DATE NOT NULL,
