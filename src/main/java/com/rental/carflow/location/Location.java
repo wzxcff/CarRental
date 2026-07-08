@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.util.UUID;
 
+@Table(name = "locations")
 @Entity
 public class Location {
     @Id

@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
+@Table(name = "users")
 @Entity
 public class User {
     @Id

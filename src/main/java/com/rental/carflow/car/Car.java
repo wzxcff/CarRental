@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.util.UUID;
 
+@Table(name = "cars")
 @Entity
 public class Car {
     @Id
