@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Table(name = "cars")
@@ -42,4 +43,13 @@ public class Car {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Status status;
+
+    @Column(nullable = false)
+    private BigDecimal purchasePrice;
+
+    @Column(nullable = false)
+    private LocalDate purchaseDate;
+
+    @Column(nullable = false)
+    private Integer mileage;
 }
