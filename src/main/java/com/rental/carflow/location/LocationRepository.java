@@ -8,5 +8,4 @@ import java.util.UUID;
 public interface LocationRepository extends JpaRepository<Location, UUID> {
     boolean existsByName(String name);
     Optional<Location> findByName(String name);
-    Optional<Location> findByUUID(UUID uuid);
 }
