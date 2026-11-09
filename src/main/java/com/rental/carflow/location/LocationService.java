@@ -1,5 +1,7 @@
 package com.rental.carflow.location;
 
+import com.rental.carflow.common.ConflictException;
+import com.rental.carflow.common.ResourceNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +20,7 @@ public class LocationService {
     @Transactional
     public LocationDTO createLocation(CreateLocationRequest request) {
         if (locationRepository.existsByName(request.name())) {
-            throw new RuntimeException("Location with name " + request.name() + " already exists"); // TODO: Implement ConflictException
+            throw new ConflictException("Location with name " + request.name() + " already exists");
         }
 
         Location location = new Location(null, request.name(), request.address());
@@ -27,7 +29,7 @@ public class LocationService {
     }
 
     public LocationDTO getLocationById(UUID uuid) {
-        Location location = locationRepository.findById(uuid).orElseThrow(() -> new RuntimeException("Location not found with id " + uuid)); // TODO: Implement ResourceNotFoundException
+        Location location = locationRepository.findById(uuid).orElseThrow(() -> new ResourceNotFoundException("Location not found with id " + uuid));
         return new LocationDTO(location.getId(), location.getName(), location.getAddress());
     }
 
@@ -38,7 +40,7 @@ public class LocationService {
 
     @Transactional
     public void deleteLocationById(UUID uuid) {
-        Location location = locationRepository.findById(uuid).orElseThrow(() -> new RuntimeException("Location not found with id " + uuid)); // TODO: Implement ResourceNotFoundException
+        Location location = locationRepository.findById(uuid).orElseThrow(() -> new ResourceNotFoundException("Location not found with id " + uuid));
         locationRepository.delete(location);
     }
 
