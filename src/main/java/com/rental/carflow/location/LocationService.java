@@ -40,7 +40,7 @@ public class LocationService {
 
     @Transactional
     public void deleteLocationById(UUID uuid) {
-        Location location = locationRepository.findById(uuid).orElseThrow(() -> new RuntimeException("Location not found with id " + uuid)); // TODO: Implement ResourceNotFoundException
+        Location location = locationRepository.findById(uuid).orElseThrow(() -> new ResourceNotFoundException("Location not found with id " + uuid));
         locationRepository.delete(location);
     }
 
